@@ -1,5 +1,7 @@
+
 .negator.main-content {
-	position:relative;
+    position:relative;
+    min-height:250px;
 }
 
 .negator .intense {
@@ -84,7 +86,8 @@
 }
 
 .negator .hidden {
-	opacity: 0;
+    opacity: 0;
+    display: none;
 }
 
 .negator .mild {

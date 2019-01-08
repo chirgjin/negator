@@ -18,7 +18,7 @@ $(".slider").change(function () {
 });
 
 $(".search").change(function () {
-    console.log(this.value)
+    chrome.storage.local.set( {this.value}, function () {});
 })
 
 $('.search').keypress(function(e) {

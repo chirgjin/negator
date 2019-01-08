@@ -14,7 +14,8 @@
     }
     .negator-popup{
         width: 350px;
-        height: 500px;
+        height: auto;
+        min-height: 550px;
         background: #016070;
         position: relative;
     }
@@ -172,11 +173,11 @@ input:checked + .slide-switch:before {
 .toggle-hate-type{
     margin-left: 20px;
     margin-right: 20px;
-    margin-top:30px;
 }
 .hate-type {
     display: flex;
     justify-content: space-between;
+    margin-top:30px;
 }
 p{
     font-size: 20px;
@@ -184,6 +185,29 @@ p{
     font-weight: bold;
     color: white;
     letter-spacing: 0.5px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  transition: all  1s ease-in;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #016070; 
+  transition: all  1s ease-in;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #016070; 
+  border-radius: 5px;
+  transition: all 1s ease-in;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #00434e; 
 }
 </style>
 <body>
@@ -209,7 +233,85 @@ p{
                     <span class="slide-switch round"></span>
                 </label>
             </div>
+            <div class="hate-type">
+                <p>Crime</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slide-switch round"></span>
+                </label>
+            </div>
+            <div class="hate-type">
+                <p>Crime</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slide-switch round"></span>
+                </label>
+            </div>
+            <div class="hate-type">
+                <p>Crime</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slide-switch round"></span>
+                </label>
+            </div>
+            <div class="hate-type">
+                <p>Crime</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slide-switch round"></span>
+                </label>
+            </div>
+            <div class="hate-type">
+                <p>Crime</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slide-switch round"></span>
+                </label>
+            </div>
+            <div class="hate-type">
+                <p>Crime</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slide-switch round"></span>
+                </label>
+            </div>
+            <div class="hate-type">
+                <p>Crime</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slide-switch round"></span>
+                </label>
+            </div>
+            <div class="hate-type">
+                <p>Crime</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slide-switch round"></span>
+                </label>
+            </div>
+            <div class="hate-type">
+                <p>Crime</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slide-switch round"></span>
+                </label>
+            </div>
+            <div class="hate-type">
+                <p>Crime</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slide-switch round"></span>
+                </label>
+            </div>
+            <div class="hate-type">
+                <p>Crime</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slide-switch round"></span>
+                </label>
+            </div>
         </div>
+        <div style="height:15px;"></div>
     </div>
 </body>
     <script src="jQuery.js"></script>

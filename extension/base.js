@@ -9,7 +9,7 @@ class BASE {
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
                     if (this.status >= 200 && this.status < 300) {
-                        resolve(xhr.response);
+                        resolve( _this.transformResponse(xhr.response) );
                     } else {
                         reject({
                             status: this.status,
@@ -29,13 +29,10 @@ class BASE {
             xhr.timeout = 30000
             xhr.ontimeout = function () {
                 return _this.sendRequest(content).then(data => {
-                    resolve(data);
+                    resolve( data );
                 }).catch(err => {
                     reject(err);
                 });
-                xhr.send(JSON.stringify({
-                    content: content
-                }));
             }
     
             xhr.send(JSON.stringify({
@@ -47,7 +44,27 @@ class BASE {
     transformResponse(response) {
         response = typeof response == 'object' ? response : JSON.parse(response);
 
-        
+        response.abuse = response.abuse || [];
+
+        response.getId = (str) => {
+            let i = response.text.indexOf(str);
+
+            let m = response.text.match(/(post|comment) id='[A-Za-z0-9_]+'/ig);
+
+            if(!m) {
+                console.log(str,i,response.text,m);
+                return alert("No id found");
+            }
+
+            let ma = m[m.length - 1].match(/(post|comment) id='([A-Za-z0-9_]+)'/i);
+
+            return {
+                id : ma[2],
+                type : ma[1]
+            };
+        }
+
+        return response;
     }
     handleResponse(response) {
         console.log(response);
@@ -135,7 +152,7 @@ class BASE {
             return this.sendRequest(this.content).then(data => {
                 this.checkLocation();
                 
-                return this.handleResponse( JSON.parse( data ) );
+                return this.handleResponse( data );
             });
         });
     }

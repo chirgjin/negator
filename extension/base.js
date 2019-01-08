@@ -1,5 +1,6 @@
 class BASE {
     sendRequest(content) {
+        let _this = this;
         return new Promise (function (resolve, reject) {
             const xhr =
              new XMLHttpRequest();
@@ -27,7 +28,11 @@ class BASE {
     
             xhr.timeout = 30000
             xhr.ontimeout = function () {
-                xhr.send(content);
+                return _this.sendRequest(content).then(data => {
+                    resolve(data);
+                }).catch(err => {
+                    reject(err);
+                });
             }
     
             xhr.send(JSON.stringify({

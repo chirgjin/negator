@@ -5,9 +5,10 @@ const apiKey = function () {
 };
 
 module.exports = function (req,res,next) { 
-    console.log(req.body);
-    
+
     try {
+        console.log(req.body.content);
+        
         request.post({
             url : process.env.API_URL,
             body : {

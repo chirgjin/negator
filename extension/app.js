@@ -4,7 +4,7 @@ $(".slider").on('input', function () {
 });
 
 $(".search").change(function () {
-    chrome.storage.local.set( {this.value}, function () {});
+    // chrome.storage.local.set( {this.value}, function () {});
 })
 
 $('.search').keypress(function(e) {
@@ -12,9 +12,7 @@ $('.search').keypress(function(e) {
        e.preventDefault();
        console.log(this.value)
      }
-<<<<<<< HEAD
-});
-=======
+
 });
 
->>>>>>> 910d33101b125ffea547566f5421f607bfefe178
+

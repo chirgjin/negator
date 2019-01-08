@@ -28,17 +28,14 @@ class BASE {
     
             xhr.timeout = 30000
             xhr.ontimeout = function () {
-<<<<<<< Updated upstream
                 return _this.sendRequest(content).then(data => {
                     resolve(data);
                 }).catch(err => {
                     reject(err);
                 });
-=======
                 xhr.send(JSON.stringify({
                     content: content
                 }));
->>>>>>> Stashed changes
             }
     
             xhr.send(JSON.stringify({

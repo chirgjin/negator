@@ -33,6 +33,9 @@ class BASE {
                 }).catch(err => {
                     reject(err);
                 });
+                xhr.send(JSON.stringify({
+                    content: content
+                }));
             }
     
             xhr.send(JSON.stringify({

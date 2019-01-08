@@ -69,6 +69,122 @@
         cursor: pointer;
         border-radius: 50%;
     }
+    .search-toggle-wrap{
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-top: 30px;
+        position: relative;
+    }
+    .search{
+        width: 82.5%;
+        color: #016070;
+        letter-spacing: 0.5px;
+        font-weight: normal;
+        border-radius: 40px;
+        border: 0px;
+        padding: 15px;
+        padding-left: 40px;
+    }
+    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: #016070;
+    }
+    ::-moz-placeholder { /* Firefox 19+ */
+        color: #016070;
+    }
+    :-ms-input-placeholder { /* IE 10+ */
+        color: #016070;
+    }
+    :-moz-placeholder { /* Firefox 18- */
+        color: #016070;
+    }
+    input:focus{
+        outline: none;
+    }
+    .search-img{
+        height: 25px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 10px;
+    }
+    /* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slide-switch {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slide-switch:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #016070;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slide-switch {
+  background-color: #ffffff;
+}
+
+input:focus + .slide-switch {
+  box-shadow: 0 0 1px #ffffff;
+}
+
+input:checked + .slide-switch:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slide-switch.round {
+  border-radius: 34px;
+}
+
+.slide-switch.round:before {
+  border-radius: 50%;
+}
+.toggle-hate-type{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top:30px;
+}
+.hate-type {
+    display: flex;
+    justify-content: space-between;
+}
+p{
+    font-size: 20px;
+    margin: 0;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 0.5px;
+}
 </style>
 <body>
     <div class="negator-popup">
@@ -76,13 +192,26 @@
             <img src="img/popup-logo.png" class="popup-logo">
         </div>
         <div class="intensty-hate">
-            <h2>Intensity of Hate Speech</h2>
+            <h2>Intensity of Hate Speech - <span class="percentage">60%</span></h2>
             <div class="intensity-slider" style="width:100%;">
                 <input type="range" min="1" max="100" value="60" class="slider" id="myRange">
             </div>
         </div>
+        <div class="search-toggle-wrap">
+            <input onchange="search()" class="search" placeholder="Search Abusive Topics" type="text">
+            <img src="img/magnifier.png" class="search-img">
+        </div>
+        <div class="toggle-hate-type">
+            <div class="hate-type">
+                <p>Crime</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slide-switch round"></span>
+                </label>
+            </div>
+        </div>
     </div>
 </body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="jQuery.js"></script>
     <script src="app.js"></script>
 </html>

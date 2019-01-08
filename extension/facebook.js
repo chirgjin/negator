@@ -28,7 +28,7 @@ class Facebook extends BASE {
     }
 
     getContent() {
-        let $ = this.$ || jQuery;
+        //let $ = this.$ || jQuery;
 
         let cont = '';
 
@@ -43,6 +43,11 @@ class Facebook extends BASE {
         console.log(cont);
 
         return cont;
+    }
+
+    isReady() {
+
+        return !$("._2iwq._6b5s").hasClass("_2x3w");
     }
 
     handleResponse(response) {

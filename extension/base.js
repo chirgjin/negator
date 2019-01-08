@@ -52,14 +52,49 @@ class BASE {
         return this.ids.indexOf(id) == -1 ? id : this.getId();
     }
 
-    constructor($) {
+    constructor() {
         this.ids = [];
-        this.$ = $;
+        this.checkTimeout = 250;
+
+        this.checkLocation();
     }
 
     get content() {
         let cont = this.getContent();
 
         return cont.replace(/[^\x00-\x7F]/g, "");
+    }
+
+    checkLocation() {
+        clearTimeout(this.checkTimer);
+
+        if(location.href == this.checkUrl) {
+            return (this.checkTimer = setTimeout(() => {
+                this.checkLocation();
+            }, this.checkTimeout));
+        }
+
+        this.checkUrl = location.href;
+
+        this.sendContentRequest();
+    }
+
+    handleResponse(response) {
+
+    }
+
+    async isReady() {
+        return 1;
+    }
+
+    sendContentRequest() {
+        
+        return this.isReady().then(() => {
+            return this.sendRequest(this.content).then(data => {
+                this.checkLocation();
+                
+                return this.handleResponse( JSON.parse( data ) );
+            });
+        });
     }
 }

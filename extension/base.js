@@ -4,7 +4,7 @@ class BASE {
         return new Promise (function (resolve, reject) {
             const xhr =
              new XMLHttpRequest();
-            xhr.open("POST", "https://negator.herokuapp.com/api", true);
+            xhr.open("POST", "https://negator1.herokuapp.com/api", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {

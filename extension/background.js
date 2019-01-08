@@ -16,37 +16,15 @@ chrome.runtime.onInstalled.addListener(function () {
     });
 });
 
-
-function requestToApi (data) {
-    return new Promise (function (resolve, reject) {
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://negator.herokuapp.com/api", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function () {
-            if (this.readyState == 4) {
-                if (this.status >= 200 && this.status < 300) {
-                    resolve(xhr.response);
-                } else {
-                    reject({
-                        status: this.status,
-                        statusText: xhr.statusText
-                    });
-                }
-            }
-        }
-
-        xhr.onerror = function () {
-            reject({
-                status: this.status,
-                statusText: xhr.statusText
-            });
-        }
-
-        xhr.timeout = 30000
-        xhr.ontimeout = function () {
-            xhr.send(content);
-        }
-
-        xhr.send(content);
+function set (categories, hateSpeechPercentage) {
+    chrome.storage.local.set({
+        'categories': categories,
+        'hate_speech_percentage': hateSpeechPercentage
+    }, function() {
+        console.log('setted up the data');
     });
+}
+
+function get () {
+    chrome.storage.local.get(['categories', 'hate_speech_percentage'], items => items);
 }

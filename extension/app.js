@@ -1,19 +1,5 @@
-document.addEventListener('load', function () {
-    chrome.tabs.query({
-        active: true,
-    }, function (tabs) {
-        chrome.tabs.executeScript(tabs[0].id, {
-            code:  "console.log('lol')"
-        });
-    });
-});
-
-window.onload = function () {
-    console.log('lol');
-}
-
-
-$(".slider").change(function () {
+    
+$(".slider").on('input', function () {
     $('.percentage').html(this.value+'%')
 });
 
@@ -27,3 +13,4 @@ $('.search').keypress(function(e) {
        console.log(this.value)
      }
 });
+

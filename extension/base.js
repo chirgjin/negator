@@ -30,7 +30,9 @@ class BASE {
                 xhr.send(content);
             }
     
-            xhr.send(`content=${encodeURIComponent(content)}`);
+            xhr.send(JSON.stringify({
+                content : content
+            }));
         });
     }
     
@@ -38,7 +40,7 @@ class BASE {
         console.log(response);
     }
     
-    getid() {
+    getId() {
 
         return (prefix='') => {
             let id = prefix +  Math.floor(Math.random() * 10000000).toString();

@@ -6,7 +6,7 @@ class Facebook extends BASE {
         }
 
 
-        let id = getId('p');
+        let id = this.getId('p');
         let text = `<post id='${id}' ><content>${post.find('[data-ad-preview="message"]').text()}</content>`;
 
         post.find("[aria-label='Comment']").each((i,el) => {
@@ -14,7 +14,7 @@ class Facebook extends BASE {
             if(el.hasBeenChecked) {
                 return ;
             }
-            let id = getId('c');
+            let id = this.getId('c');
             text += `<comment id='${id}' >${el.textContent}</comment>`;
 
             el.setAttribute("data-negator_id", id);
@@ -41,7 +41,7 @@ class Facebook extends BASE {
         });
         
         console.log(cont);
-        
+
         return cont;
     }
 

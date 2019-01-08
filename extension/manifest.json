@@ -14,7 +14,7 @@
     },
     "content_scripts": [
         {
-            "matches": ["https://*/", "http://*/"], 
+            "matches": ["<all_urls>"], 
             "js": ["runtime.js"],
             "run_at": "document_start"
         }

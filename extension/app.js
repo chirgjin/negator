@@ -6,4 +6,8 @@ document.addEventListener('load', function () {
             code:  "console.log('lol')"
         });
     });
-})
+});
+
+window.onload = function () {
+    console.log('lol');
+}

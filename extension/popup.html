@@ -4,8 +4,85 @@
     <meta charset="UTF-8">
     <title>Negator</title>
 </head>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto');
+    body{
+        padding: 0px 0px;
+        margin: 0px 0px;
+        border: 0px;
+        font-family: 'Roboto';
+    }
+    .negator-popup{
+        width: 350px;
+        height: 500px;
+        background: #016070;
+        position: relative;
+    }
+    .negator-icon{
+        max-width: 95%;
+        display: flex;
+        justify-content: center;
+        height: 60px;
+        align-items: center;
+    }
+    .popup-logo{
+        height: 30px;
+    }
+    .intensty-hate {
+        display: flex;
+        /* justify-content: flex-start; */
+        align-items: flex-start;
+        flex-direction: column;
+        padding-left: 20px;
+        padding-right: 20px;
+        width: auto;
+    }
+    h2{
+        color: white;   
+        letter-spacing: 0.5px;
+        font-size: 1.25em;
+    }
+    .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 5px;
+        background: white;
+        outline: none;
+        border-radius: 10px;
+    }
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 30px;
+        height: 30px;
+        background: #ffffff;
+        border: 5px solid #016070;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+
+    .slider::-moz-range-thumb {
+        width: 30px;
+        height: 30px;
+        background: #ffffff;
+        border: 5px solid #016070;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+</style>
 <body>
-    <button id="lol">lol</button>
+    <div class="negator-popup">
+        <div class="negator-icon">
+            <img src="img/popup-logo.png" class="popup-logo">
+        </div>
+        <div class="intensty-hate">
+            <h2>Intensity of Hate Speech</h2>
+            <div class="intensity-slider" style="width:100%;">
+                <input type="range" min="1" max="100" value="60" class="slider" id="myRange">
+            </div>
+        </div>
+    </div>
 </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="app.js"></script>
 </html>

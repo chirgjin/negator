@@ -11,3 +11,8 @@ document.addEventListener('load', function () {
 window.onload = function () {
     console.log('lol');
 }
+
+
+$(".slider").change(function () {
+    console.log(this.value);
+});

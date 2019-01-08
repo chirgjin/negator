@@ -7,7 +7,7 @@ class Facebook extends BASE {
 
 
         let id = this.getId('p');
-        let text = `<post id='${id}' ><content>${post.find('[data-ad-preview="message"]').text().trim()}</content>`;
+        let text = `<post id='${id}' >\n<content>\n${post.find('[data-ad-preview="message"]').text().trim()}\n</content>\n`;
 
         post.find("[aria-label='Comment']").each((i,el) => {
             el = $(el);
@@ -16,14 +16,14 @@ class Facebook extends BASE {
                 return ;
             }
             let id = this.getId('c');
-            text += `<comment id='${id}' >${el.text().trim()}</comment>`;
+            text += `<comment id='${id}' >\n${el.text().trim()}\n</comment>\n`;
 
             el.attr("data-negator_id", id);
         });
 
         post.attr("data-negator_id", id);
 
-        text += `</post>`;
+        text += `</post>\n`;
 
         return text;
     }
@@ -31,13 +31,16 @@ class Facebook extends BASE {
     getContent() {
         //let $ = this.$ || jQuery;
 
-        let cont = 'I will kill you';
-
+        let cont = '';
+        
         $("[role='article']").each((i,el) => {
             el = $(el);
 
-            if(el.css("display") != 'none' && el.attr("aria-label") != 'Comment') {
-                cont += this.loadPostData(el);
+            if(cont.trim().length < 50 && el.css("display") != 'none' && el.attr("aria-label") != 'Comment') {
+                cont += this.loadPostData(el) || '';
+                if(cont.trim().length < 50) {
+                    this.sendNextBatch = 1;
+                }
             }
         });
 
@@ -58,8 +61,6 @@ class Facebook extends BASE {
     }
 
     handleResponse(response) {
-
-        console.log(response);
 
         response.abuse.forEach(abuse => {
             console.log(response.getId(abuse.text))

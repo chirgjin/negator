@@ -5,14 +5,14 @@ const apiKey = function () {
 };
 
 module.exports = function (req,res,next) { 
+    console.log(req.body)
 
     try {
-
-        request.post({
+        let data = {
             url : process.env.API_URL,
             body : {
                 settings : {
-                    words : true
+                    snippets : true,
                 },
                 content : req.body.content,
                 language : process.env.API_LANG
@@ -21,7 +21,11 @@ module.exports = function (req,res,next) {
             headers : {
                 "Ocp-Apim-Subscription-Key" : apiKey()
             }
-        }).pipe(res);
+        };
+
+        console.log(data);
+
+        request.post(data).pipe(res);
     }
     catch (e) {
         res.json({

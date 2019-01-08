@@ -1,0 +1,119 @@
+.negator.main-content {
+	position:relative;
+}
+
+.negator .intense {
+	width:100%;
+	height: 100%;
+	position: absolute;
+	background: url('https://i.imgur.com/QUoI7gg.png');
+	background-size: cover;
+}
+
+.negator .intense .content {
+	width: 100%;
+    height: 100%;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.negator .intense .content .grid {
+	display: grid;
+}
+
+.negator .intense .content img {
+    width: 40px;
+    margin: 0 auto;
+}
+
+.negator .intense .content p {
+	display: block;
+    font-family: Roboto !important;
+    width: 94%;
+    font-size: 16px;
+    letter-spacing: 0.2px;
+    font-weight: 500;
+    margin: 0 auto;
+    margin-top: 10px;
+    color: #e4e9ea;
+}
+
+.negator .intense .content ul {
+	display: inline-block;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.negator .intense .content ul li {
+	background: #e4e9ea;
+    padding: 3px 15px;
+    margin: 5px 5px;
+    display: inline-flex;
+    font-size: 12px;
+    font-family: Roboto !important;
+    font-weight: 500;
+    color: #617986;
+    border-radius: 3px;
+}
+
+.negator .intense .content button {
+	width: 90%;
+    border: none;
+    border-top: 2px solid #e4e9ea85;
+    font-family: Roboto !important;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 11px 0px;
+    color: #e4e9ea;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0px;
+    left: 5%;
+    background: transparent;
+}
+
+.negator .hide-post {
+	position: absolute;
+    width: 30px;
+    left: 50%;
+    cursor: pointer;
+    bottom: -43px;
+    transform: translateX(-50%);
+    z-index: 999999999;
+}
+
+.negator .hidden {
+	opacity: 0;
+}
+
+.negator .mild {
+	background: #768E9F;
+    color: #768E9F;
+    padding: 2px 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+  	position: relative;
+  	display: inline-block;
+}
+
+.negator .mild {
+  border-bottom: 1px dotted black;
+}
+
+.negator .mild .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.negator .mild:hover .tooltiptext {
+  visibility: visible;
+}
+

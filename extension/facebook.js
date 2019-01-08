@@ -1,28 +1,29 @@
 class Facebook extends BASE {
 
     loadPostData(post) {
-        if(post.data("checked")) {
-            return ;
+        if(post.data("negator_id")) {
+            return '';
         }
 
 
         let id = this.getId('p');
-        let text = `<post id='${id}' ><content>${post.find('[data-ad-preview="message"]').text()}</content>`;
+        let text = `<post id='${id}' >\n<content>\n${post.find('[data-ad-preview="message"]').text().trim()}\n</content>\n`;
 
         post.find("[aria-label='Comment']").each((i,el) => {
-            
-            if(el.hasBeenChecked) {
+            el = $(el);
+
+            if(el.data("negator_id")) {
                 return ;
             }
             let id = this.getId('c');
-            text += `<comment id='${id}' >${el.textContent}</comment>`;
+            text += `<comment id='${id}' >\n${el.text().trim()}\n</comment>\n`;
 
-            el.setAttribute("data-negator_id", id);
+            el.attr("data-negator_id", id);
         });
 
         post.attr("data-negator_id", id);
 
-        text += `</post>`;
+        text += `</post>\n`;
 
         return text;
     }
@@ -30,17 +31,18 @@ class Facebook extends BASE {
     getContent() {
         //let $ = this.$ || jQuery;
 
-        let cont = 'I will kill you';
-
+        let cont = '';
+        
         $("[role='article']").each((i,el) => {
             el = $(el);
 
-            if(el.css("display") != 'none' && el.attr("aria-label") != 'Comment') {
-                cont += this.loadPostData(el);
+            if(cont.trim().length < 50 && el.css("display") != 'none' && el.attr("aria-label") != 'Comment') {
+                cont += this.loadPostData(el) || '';
+                if(cont.trim().length < 50) {
+                    this.sendNextBatch = 1;
+                }
             }
         });
-        
-        console.log(cont);
 
         return cont;
     }
@@ -48,7 +50,6 @@ class Facebook extends BASE {
     async isReady() {
         
         if(!$("._2iwq._6b5s").hasClass("_2x3w")) {
-            console.log($("._2iwq._6b5s"))
             await this.wait(250);
             
             return await this.isReady();
@@ -61,6 +62,9 @@ class Facebook extends BASE {
 
     handleResponse(response) {
 
+        response.abuse.forEach(abuse => {
+            console.log(response.getId(abuse.text))
+        });
     }
 
 };

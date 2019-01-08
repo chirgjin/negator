@@ -45,17 +45,21 @@ class BASE {
         console.log(response);
     }
     
-    getId() {
+    getId(prefix='') {
 
-        return (prefix='') => {
-            let id = prefix +  Math.floor(Math.random() * 10000000).toString();
+        let id = prefix +  Math.floor(Math.random() * 10000000).toString();
 
-            return this.ids.indexOf(id) == -1 ? id : this.getId();
-        };
+        return this.ids.indexOf(id) == -1 ? id : this.getId();
     }
 
     constructor($) {
         this.ids = [];
         this.$ = $;
+    }
+
+    get content() {
+        let cont = this.getContent();
+
+        return cont.replace(/[^\x00-\x7F]/g, "");
     }
 }

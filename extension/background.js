@@ -17,10 +17,10 @@ chrome.runtime.onInstalled.addListener(function () {
 });
 
 
-function requestToApi (data, callback) {
+function requestToApi (data) {
     return new Promise (function (resolve, reject) {
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", "negator.herokuapp.com/api", true);
+        xhr.open("POST", "https://negator.herokuapp.com/api", true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onreadystatechange = function () {
             if (this.readyState == 4) {

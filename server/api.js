@@ -11,7 +11,10 @@ module.exports = function (req,res,next) {
         request.post({
             url : process.env.API_URL,
             body : {
-                settings : {},
+                settings : {
+                    paragraphs : true,
+                    snippets : true,
+                },
                 content : req.body.content,
                 language : process.env.API_LANG
             },

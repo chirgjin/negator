@@ -68,6 +68,8 @@ class BASE {
     checkLocation() {
         clearTimeout(this.checkTimer);
 
+        console.log("Checking Location");
+
         if(location.href == this.checkUrl) {
             return (this.checkTimer = setTimeout(() => {
                 this.checkLocation();
@@ -88,13 +90,25 @@ class BASE {
     }
 
     sendContentRequest() {
-        
+        console.log("Sending Content Req");
+
         return this.isReady().then(() => {
+
+            console.log("IsReady");
+            
             return this.sendRequest(this.content).then(data => {
                 this.checkLocation();
                 
                 return this.handleResponse( JSON.parse( data ) );
             });
+        });
+    }
+
+    wait(ms=100) {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve();
+            }, ms);
         });
     }
 }

@@ -1,19 +1,5 @@
-document.addEventListener('load', function () {
-    chrome.tabs.query({
-        active: true,
-    }, function (tabs) {
-        chrome.tabs.executeScript(tabs[0].id, {
-            code:  "console.log('lol')"
-        });
-    });
-});
-
-window.onload = function () {
-    console.log('lol');
-}
-
-
-$(".slider").change(function () {
+    
+$(".slider").on('input', function () {
     $('.percentage').html(this.value+'%')
 });
 
@@ -26,4 +12,9 @@ $('.search').keypress(function(e) {
        e.preventDefault();
        console.log(this.value)
      }
+<<<<<<< HEAD
 });
+=======
+});
+
+>>>>>>> 910d33101b125ffea547566f5421f607bfefe178

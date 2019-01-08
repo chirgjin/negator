@@ -3,7 +3,6 @@
     "version": "1.0",
     "description": "Hate Speech Recognition",
     "manifest_version": 2,
-    "default_locale": "en",
     "permissions": ["activeTab", "storage", "declarativeContent"],
     "background": {
         "scripts": ["background.js"],
@@ -11,7 +10,7 @@
     },
     "page_action": {
         "default_popup": "popup.html",
-        "default_icon": {},
+        "default_icon": "img/icon16.png",
         "default_title": "Negator"
     },
     "content_scripts": [

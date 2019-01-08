@@ -6,4 +6,6 @@ document.addEventListener('load', function () {
             code:  "console.log('lol')"
         });
     });
-})
+});
+
+console.log('lol');

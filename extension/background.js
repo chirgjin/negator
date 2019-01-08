@@ -1,5 +1,5 @@
 chrome.runtime.onInstalled.addListener(function () {
-    chrome.storage.sync.set({color: '#3aa757'}, function () {
+    chrome.storage.local.set({color: '#3aa757'}, function () {
         console.log('The color is green.');
     });
     chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
@@ -16,12 +16,37 @@ chrome.runtime.onInstalled.addListener(function () {
     });
 });
 
-document.addEventListener('load', function () {
-    chrome.tabs.query({
-        active: true,
-    }, function (tabs) {
-        chrome.tabs.executeScript(tabs[0].id, {
-            code:  "console.log('lol')"
-        });
+
+function requestToApi (data, callback) {
+    return new Promise (function (resolve, reject) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "negator.herokuapp.com/api", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                if (this.status >= 200 && this.status < 300) {
+                    resolve(xhr.response);
+                } else {
+                    reject({
+                        status: this.status,
+                        statusText: xhr.statusText
+                    });
+                }
+            }
+        }
+
+        xhr.onerror = function () {
+            reject({
+                status: this.status,
+                statusText: xhr.statusText
+            });
+        }
+
+        xhr.timeout = 30000
+        xhr.ontimeout = function () {
+            xhr.send(content);
+        }
+
+        xhr.send(content);
     });
-})
+}

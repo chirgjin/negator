@@ -1,18 +1,18 @@
-document.addEventListener('load', function () {
-    chrome.tabs.query({
-        active: true,
-    }, function (tabs) {
-        chrome.tabs.executeScript(tabs[0].id, {
-            code:  "console.log('lol')"
-        });
-    });
+    
+$(".slider").on('input', function () {
+    $('.percentage').html(this.value+'%')
 });
 
-window.onload = function () {
-    console.log('lol');
-}
+// $(".search").change(function () {
+//     console.log(this.value);
+// })
+
+// $('.search').keypress(function(e) {
+//     if (e.which == '13') {
+//        e.preventDefault();
+//        console.log(this.value)
+//      }
+
+// });
 
 
-$(".slider").change(function () {
-    console.log(this.value);
-});

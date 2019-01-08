@@ -11,5 +11,12 @@
     "page_action": {
         "default_popup": "index.html",
         "default_icon": {}
-    } 
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://*/", "http://*/"], 
+            "js": ["runtime.js"],
+            "run_at": "document_start"
+        }
+    ]
 }

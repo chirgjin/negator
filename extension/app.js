@@ -4,7 +4,7 @@ $(".slider").on('input', function () {
 });
 
 $(".search").change(function () {
-    // chrome.storage.local.set( {this.value}, function () {});
+    console.log(this.value);
 })
 
 $('.search').keypress(function(e) {

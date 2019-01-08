@@ -13,9 +13,12 @@ function loadPostData(post) {
         return ;
     }
 
-    
+
     let id = getId();
     let text = `<post id='${id}' ><content>${post.find('[data-ad-preview="message"]').text()}</content>`;
 
-    post.find("[aria-label")
+    post.find("[aria-label='Comment']").each((i,el) => {
+        el = $(el);
+        
+    });
 }

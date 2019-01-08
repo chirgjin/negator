@@ -44,6 +44,11 @@ class BASE {
         });
     }
     
+    transformResponse(response) {
+        response = typeof response == 'object' ? response : JSON.parse(response);
+
+        
+    }
     handleResponse(response) {
         console.log(response);
     }

@@ -7,12 +7,13 @@ const apiKey = function () {
 module.exports = function (req,res,next) { 
 
     try {
-        console.log(req.body.content);
-        
+
         request.post({
             url : process.env.API_URL,
             body : {
-                settings : {},
+                settings : {
+                    words : true
+                },
                 content : req.body.content,
                 language : process.env.API_LANG
             },

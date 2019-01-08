@@ -28,9 +28,9 @@ class Facebook extends BASE {
     }
 
     getContent() {
-        let $ = this.$ || jQuery;
+        //let $ = this.$ || jQuery;
 
-        let cont = '';
+        let cont = 'I will kill you';
 
         $("[role='article']").each((i,el) => {
             el = $(el);
@@ -43,6 +43,20 @@ class Facebook extends BASE {
         console.log(cont);
 
         return cont;
+    }
+
+    async isReady() {
+        
+        if(!$("._2iwq._6b5s").hasClass("_2x3w")) {
+            console.log($("._2iwq._6b5s"))
+            await this.wait(250);
+            
+            return await this.isReady();
+        }
+
+        console.log("Ready Now");
+
+        return 1;
     }
 
     handleResponse(response) {

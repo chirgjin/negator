@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const request = require("request");
-const http = require('http2');
+const http = require('http');
 const app = express();
 
 app.use(express.json());

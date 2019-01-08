@@ -4,7 +4,7 @@ class BASE {
         return new Promise (function (resolve, reject) {
             const xhr =
              new XMLHttpRequest();
-            xhr.open("POST", "https://negator1.herokuapp.com/api", true);
+            xhr.open("POST", "https://negatorrrrrrr.herokuapp.com/api", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
@@ -49,7 +49,7 @@ class BASE {
         response.getId = (str) => {
             let i = response.text.indexOf(str);
 
-            let m = response.text.match(/(post|comment) id='[A-Za-z0-9_]+'/ig);
+            let m = response.text.substr(0,i+1).match(/(post|comment) id='[A-Za-z0-9_]+'/ig);
 
             if(!m) {
                 console.log(str,i,response.text,m);
@@ -65,9 +65,6 @@ class BASE {
         }
 
         return response;
-    }
-    handleResponse(response) {
-        console.log(response);
     }
     
     getId(prefix='') {
@@ -151,6 +148,13 @@ class BASE {
 
             return this.sendRequest(this.content).then(data => {
                 this.checkLocation();
+                
+                
+                if(this.sendNextBatch) {
+                    this.sendNextBatch = 0;
+                    this.sendContentRequest();
+                }
+
                 
                 return this.handleResponse( data );
             });

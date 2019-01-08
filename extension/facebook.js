@@ -47,7 +47,7 @@ class Facebook extends BASE {
 
     async isReady() {
 
-        while($("._2iwq._6b5s").hasClass("_2x3w")) {
+        while(!$("._2iwq._6b5s").hasClass("_2x3w")) {
             await this.wait(250);
         }
 

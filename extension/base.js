@@ -57,6 +57,32 @@ class BASE {
         this.checkTimeout = 250;
 
         this.checkLocation();
+
+        let css = document.createElement("style");
+        css.type = "text/css";
+        css.innerHTML = `._2iwq._6b5s._2x3w {animation: __nodeInserted 0.001s !important; -o-animation: __nodeInserted 0.001s !important; -ms-animation: __nodeInserted 0.001s !important; -moz-animation: __nodeInserted 0.001s !important; -webkit-animation: __nodeInserted 0.001s !important;}
+        @keyframes __nodeInserted {from{outline-color: #111;}to{outline-color: #000;}}
+        @-moz-keyframes __nodeInserted {from{outline-color: #111;}to{outline-color: #000;}}
+        @-webkit-keyframes __nodeInserted {from{outline-color: #111;}to{outline-color: #000;}}
+        @-ms-keyframes __nodeInserted {from{outline-color: #111;}to{outline-color: #000;}}
+        @-o-keyframes __nodeInserted {from{outline-color: #111;}to{outline-color: #000;}}`;
+        document.body.appendChild(css);
+
+        document.addEventListener('animationstart', (e) => {
+            this.insertion_event(e);
+        }, false);
+        document.addEventListener('MSAnimationStart', (e) => {
+            this.insertion_event(e);
+        }, false);
+        document.addEventListener('webkitAnimationStart', (e) => {
+            this.insertion_event(e);
+        }, false);
+    }
+
+    insertion_event(event) {
+        if (event.animationName == '__nodeInserted') {
+            return this.sendContentRequest();
+        }
     }
 
     get content() {
@@ -64,8 +90,10 @@ class BASE {
 
         return cont.replace(/[^\x00-\x7F]/g, "");
     }
-
+    
     checkLocation() {
+        return ;
+
         clearTimeout(this.checkTimer);
 
         console.log("Checking Location");
@@ -95,7 +123,7 @@ class BASE {
         return this.isReady().then(() => {
 
             console.log("IsReady");
-            
+
             return this.sendRequest(this.content).then(data => {
                 this.checkLocation();
                 

@@ -29,6 +29,10 @@ function get () {
     chrome.storage.local.get(['categories', 'hate_speech_percentage'], items => items);
 }
 
-chrome.runtime.onMessage.addListener(function (message) {
-    console.log(message);
-});
+chrome.extension.onConnect.addListener(function(port) {
+    console.log("Connected .....");
+    port.onMessage.addListener(function(msg) {
+         console.log("message recieved" + msg);
+         port.postMessage("Hi Popup.js");
+    });
+})

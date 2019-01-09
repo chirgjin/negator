@@ -17,7 +17,7 @@ class BASE {
 
             const xhr =
              new XMLHttpRequest();
-            xhr.open("POST", "https://negator-gg.herokuapp.com/api", true);
+            xhr.open("POST", "https://negator-gg1.herokuapp.com/api", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
@@ -188,6 +188,7 @@ class BASE {
                 abuse: 0,
                 abuses : [],
                 reasons : [],
+                sentiments : [],
                 negative: 0,
                 positive: 0,
             };
@@ -232,6 +233,7 @@ class BASE {
                 }
             });
 
+            ids[data.id].sentiments.push(sentiment);
 
             if(reason && ids[data.id].reasons.indexOf(reason) == -1) {
                 ids[data.id].reasons.push(reason);

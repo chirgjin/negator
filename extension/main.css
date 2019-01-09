@@ -149,3 +149,16 @@
   visibility: visible;
 }
 
+
+.negator-abuse {
+    background: #c11e24;
+    color: #c11e24;
+    border: 2px solid #c11e24;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.negator-abuse.negator-viewable {
+    color: #c11e24;
+    background: #ff00001f;
+}

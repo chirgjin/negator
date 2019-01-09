@@ -16,10 +16,10 @@ chrome.runtime.onInstalled.addListener(function () {
     });
 });
 
-function set (categories, hateSpeechPercentage) {
+function set (prop, val) {
     chrome.storage.local.set({
-        'categories': categories,
-        'hate_speech_percentage': hateSpeechPercentage
+        [prop]: val,
+        //disabledDomains : disabledDomains
     }, function() {
         console.log('setted up the data');
     });
@@ -27,7 +27,7 @@ function set (categories, hateSpeechPercentage) {
 
 function get () {
     return new Promise( resolve => {
-        chrome.storage.local.get(['categories', 'hate_speech_percentage'], data => {
+        chrome.storage.local.get(['disabledDomains', 'hate_speech_percentage'], data => {
             console.log(data);
             resolve(data);
         });
@@ -43,12 +43,32 @@ function get () {
                 if(msg.type == 'get') {
 
                     get().then(data => {
-                        port.postMessage(data.hate_speech_percentage);
+                        port.postMessage(data);
                     });
                 }
                 else if(msg.type == 'set') {
 
-                    set([], msg.hate_speech_percentage);
+                    if(msg.key == 'disabledDomains') {
+                        get().then(data => {
+                            let doms = data.disabledDomains || [];
+                            if(doms.indexOf(msg.value) == -1)
+                                doms.push(msg.value)
+                            
+                            set('disabledDomains', doms);
+                        })
+                    }
+                    else if(msg.key == 'enableDomain') {
+                        get().then(data => {
+                            let doms = data.disabledDomains || [];
+                            
+                            let index = doms.indexOf(msg.value);
+
+                            doms.splice(index,1);
+
+                            set('disabledDomains', doms);
+                        })
+                    }
+                    else set(msg.key, msg.value);
                 }
            }
       });

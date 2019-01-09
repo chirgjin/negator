@@ -4,15 +4,6 @@ class BASE {
         return 60;
     }
 
-
-
-
-
-
-
-
-
-
     sendRequest(content) {
         let _this = this;
         return new Promise (function (resolve, reject) {

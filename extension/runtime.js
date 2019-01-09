@@ -1,9 +1,8 @@
 //$.noConflict();
 
 function runCode() {
-    const fb = new Facebook(jQuery);
-
-    
+    const fb = new Twitter(jQuery);
+    fb.getContent();
 }
 
 jQuery(document).ready(() => {

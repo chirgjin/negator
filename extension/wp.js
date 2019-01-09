@@ -2,7 +2,7 @@
 		getContent() {
 			let cont = '';
 
-			$(".entry-content").each((i,el) => {
+			$(".entry-content,.postComplete").each((i,el) => {
 				el = $(el);
 				if(el.data("negator_id")) {
 					return ;
@@ -15,7 +15,8 @@
 				el.attr("data-negator_id", id);
 			});
 
-			return cont;
+			
+			return cont.length > 5000 ? cont.substr(0,5000) : cont;
 		}
 
 		async isReady() {
@@ -41,8 +42,10 @@
 					}
 
 					el.html(
-						el.html().replace(abuse.text, `<span class='mild' data-negator_id='abuse:${i}' >%abuse:${i}%<span class='tooltiptext' >${abuse.type || 'unknown'}`)
+						el.html().replace(abuse.text, `<span class='mild' data-negator_id='abuse:${i}' >%abuse:${i}%<span class='tooltiptext' >${abuse.type || 'unknown'}</span></span>`)
 					);
+					
+					el.parent().addClass("negator");
 					
 					abuse.el = () => {
 						return div.find(`[data-negator_id='abuse:${i}']`);

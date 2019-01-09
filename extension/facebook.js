@@ -2,6 +2,7 @@ class Facebook extends BASE {
 
     loadPostData(post) {
         if(post.data("negator_id")) {
+            console.log(post);
             return '';
         }
 
@@ -74,16 +75,17 @@ class Facebook extends BASE {
             if(data.type == 'post') {
                 div = div.find('[data-ad-preview="message"]');
             }
-
-            if(data.percen >= this.hidePercen || data.abuses.length > 0) {
-                this.hideStuff(div, data);
+            else if(data.type == 'comment') {
+                div = div.find("[data-testid]").find("span").find("span");
             }
+
+            this.hideStuff(div, data);
         });
     }
 
     hideStuff(div, data) {
 
-        if(data.percen >= this.hidePercen && div.text().length > 470 && data.type == 'post' && data.intense) {
+        if(data.percen >= this.hidePercen && div.text().length > 470 && data.type == 'post') {
             div.addClass("negator main-content");
             
             let htm = `<div class="intense">
@@ -93,7 +95,7 @@ class Facebook extends BASE {
                     <p>This posts may contain intense hate or violent statements which may hurt your feelings. </p>
                     <ul class="list-abuse">`;
 
-            (data.reasons || ["Unknown"]).forEach((reason) => {
+            (data.reasons || ["misconduct"]).forEach((reason) => {
                 htm += `<li>${reason}</li>`;
             });
 
@@ -118,28 +120,19 @@ class Facebook extends BASE {
             });
             
         }
-        else if(data.percen > this.hidePercen && data.percent < 95) {
-
-
-            let d = $(document.createElement('div')).addClass('mild').html(`<span class='tooltiptext' >${ (data.reasons && data.reasons.length > 1 ? data.reasons : ['Unknown']).join(',')}</span>`);
-
-            d.append(div.children());
-
-            div.html(d).addClass('negator');
-
-            d.click(function (e) {
-                $(this).css("color", $(this).css("color") != 'rgb(255, 255, 255)' ? "white" : '');
-            });
-        }
-        else {
+        else if(data.abuses.length > 0){
             let h = div.html() || '';
-            data.abuses.forEach(abuse => {
+            data.abuses.forEach( (abuse,i) => {
                 console.log(abuse);
 
-                h = h.replace(abuse.text, `<a href='#' class='mild' data-text='${escape(abuse.text)}' >${abuse.text}<span class='tooltiptext' >${abuse.type}</span></a>`);
+                h = h.replace(abuse.text, `<a href='#' class='mild' >%${i}%<span class='tooltiptext' >${abuse.type}</span></a>`);
             });
 
             if(data.abuses.length > 0) {
+                data.abuses.forEach( (abuse,i) => {
+                    h = h.replace(`%${i}%`, abuse.text);
+                });
+
                 div.html(h);
                 div.addClass('negator');
 
@@ -147,6 +140,23 @@ class Facebook extends BASE {
                     $(div).find(".mild").css("color", $(this).css("color") != 'rgb(255, 255, 255)' ? "white" : '');
                 });
             }
+
+        }
+        //else if(data.percen >= this.hidePercen) {
+        else {
+
+            let d = $(document.createElement('div')).addClass('mild').html(`<span class='tooltiptext' >${ (data.reasons && data.reasons.length > 1 ? data.reasons : ['misconduct']).join(',')}</span>`);
+
+            d.append(div.html());
+
+            div.html(d).addClass('negator');
+
+            d.click(function (e) {
+                console.log(e);
+                $(this).css("color", $(this).css("color") != 'rgb(255, 255, 255)' ? "white" : '');
+            });
+
+            console.log(d);
         }
     }
 };

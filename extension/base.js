@@ -1,7 +1,7 @@
 class BASE {
     
     get hidePercen() {
-        return 60;
+        return this._hidePercen || 60;
     }
 
     sendRequest(content) {
@@ -112,6 +112,10 @@ class BASE {
         document.addEventListener('webkitAnimationStart', (e) => {
             this.insertion_event(e);
         }, false);
+
+        chrome.storage.local.get(['categories', 'hate_speech_percentage'], data => {
+            this._hidePercen = parseInt(data.hate_speech_percentage) || 0;
+        });
     }
 
     insertion_event(event) {
@@ -264,6 +268,6 @@ class BASE {
     }
 
     isIntense(data) {
-        return data.negative >= 10 || data.negative < 10 && data.reasons.length > 0;
+        return 1 || data.negative >= 1 || data.negative < 1 && data.reasons.length > 0;
     }
 }

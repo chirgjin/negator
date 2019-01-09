@@ -26,5 +26,29 @@ function set (categories, hateSpeechPercentage) {
 }
 
 function get () {
-    chrome.storage.local.get(['categories', 'hate_speech_percentage'], items => items);
+    return new Promise( resolve => {
+        chrome.storage.local.get(['categories', 'hate_speech_percentage'], data => {
+            console.log(data);
+            resolve(data);
+        });
+    })
 }
+
+ chrome.extension.onConnect.addListener(function(port) {
+      
+      port.onMessage.addListener(function(msg) {
+           console.log(msg);
+           if(typeof msg == 'object') {
+                if(msg.type == 'get') {
+
+                    get().then(data => {
+                        port.postMessage(data.hate_speech_percentage);
+                    });
+                }
+                else if(msg.type == 'set') {
+
+                    set([], msg.hate_speech_percentage);
+                }
+           }
+      });
+ })

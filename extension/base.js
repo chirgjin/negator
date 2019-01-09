@@ -26,7 +26,7 @@ class BASE {
 
             const xhr =
              new XMLHttpRequest();
-            xhr.open("POST", "https://negatorrrrrrr.herokuapp.com/api", true);
+            xhr.open("POST", "https://negatorrrrrrrr.herokuapp.com/api", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {

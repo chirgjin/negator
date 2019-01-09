@@ -15,4 +15,6 @@ $(".slider").on('input', function () {
 
 // });
 
-
+chrome.runtime.sendMessage({
+    msg: 'lol'
+});

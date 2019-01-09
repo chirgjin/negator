@@ -28,3 +28,7 @@ function set (categories, hateSpeechPercentage) {
 function get () {
     chrome.storage.local.get(['categories', 'hate_speech_percentage'], items => items);
 }
+
+chrome.runtime.onMessage.addListener(function (message) {
+    console.log(message);
+});

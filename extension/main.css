@@ -121,6 +121,7 @@
     color: #768E9F;
     padding: 2px 5px;
     margin-right: 5px;
+    cursor: pointer;
     border-radius: 5px;
   	position: relative;
   	display: inline-block;
@@ -152,13 +153,44 @@
 
 .negator-abuse {
     background: #c11e24;
-    color: #c11e24;
+    color: #c11e24 !important;
     border: 2px solid #c11e24;
     border-radius: 5px;
     font-weight: bold;
 }
 
 .negator-abuse.negator-viewable {
-    color: #c11e24;
+    color: #c11e24 !important;
     background: #ff00001f;
+}
+
+
+.negator-blog .mild {
+    color: rgb(113, 42, 45);
+    margin-right: 5px;
+    position: relative;
+    display: inline-block;
+    background: rgb(113, 42, 45);
+    padding: 2px 5px;
+    border-radius: 5px;
+    border:2px solid rgb(113, 42, 45);
+}
+
+.blink_me {
+    animation: blinker 0.8s ease-in-out infinite;
+    background: #c11e24;
+    opacity: 0.7;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0px;
+    top:0px;
+    z-index: 9999999999;
+    display: block;
+}
+  
+@keyframes blinker {
+    50% {
+      opacity: 0;
+    }
 }

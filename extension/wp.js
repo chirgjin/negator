@@ -1,6 +1,19 @@
 	class WP extends BASE {
+
+		showWarning() {
+			$(".blink_me").remove();
+			$("body").append(`<div class="blink_me"></div>`);
+			
+			let t = setTimeout(() => {
+				$(".blink_me").remove();
+			}, 800);
+
+		}
+
 		getContent() {
 			let cont = '';
+
+			$(".entry-content,.postComplete").addClass("negator-blog");
 
 			$(".entry-content,.postComplete").each((i,el) => {
 				el = $(el);
@@ -103,6 +116,9 @@
 					div.find(".negator-abuse").toggleClass("negator-viewable");
 				});
 
+				if(data.abuses.length > 0 || data.sentiments.filter(s => s.polarity == 'negative').length > 0) {
+					this.showWarning();
+				}
 	        });
 		}
 

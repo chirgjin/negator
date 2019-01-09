@@ -17,7 +17,7 @@ class BASE {
 
             const xhr =
              new XMLHttpRequest();
-            xhr.open("POST", "https://negator-gg1.herokuapp.com/api", true);
+            xhr.open("POST", "https://negator-gg-final.herokuapp.com/api", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {

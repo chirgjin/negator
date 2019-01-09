@@ -132,7 +132,7 @@ class Facebook extends BASE {
             });
         }
         else {
-            let h = div.html();
+            let h = div.html() || '';
             data.abuses.forEach(abuse => {
                 console.log(abuse);
 

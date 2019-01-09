@@ -3,10 +3,9 @@
     "version": "1.0",
     "description": "Hate Speech Recognition",
     "manifest_version": 2,
-    "permissions": ["activeTab", "storage", "declarativeContent"],
+    "permissions": ["activeTab", "storage", "declarativeContent", "tabs"],
     "background": {
-        "scripts": ["background.js"],
-        "persistent": false
+        "scripts": ["background.js"]
     },
     "page_action": {
         "default_popup": "popup.html",

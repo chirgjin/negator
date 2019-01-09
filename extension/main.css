@@ -1,3 +1,24 @@
+/* cyrillic-ext */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src:  url('chrome-extension://__MSG_@@extension_id__/fonts/Roboto-Regular.ttf'), url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu72xKOzY.woff2) format('woff2');
+}
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    src: local('Roboto'), url('chrome-extension://__MSG_@@extension_id__/fonts/Roboto-Regular.ttf'), url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu72xKOzY.woff2) format('woff2');
+}
+
+
+
+
+
+
+
+
 
 .negator.main-content {
     position:relative;
@@ -9,7 +30,12 @@
 	height: 100%;
 	position: absolute;
 	background: url('https://i.imgur.com/QUoI7gg.png');
-	background-size: cover;
+    background-size: cover;
+    border-radius: 10px;
+}
+
+._78bu {
+    margin-top: 30px;
 }
 
 .negator .intense .content {
@@ -35,7 +61,7 @@
     width: 94%;
     font-size: 16px;
     letter-spacing: 0.2px;
-    font-weight: 500;
+    font-weight: 600;
     margin: 0 auto;
     margin-top: 10px;
     color: #e4e9ea;
@@ -52,7 +78,7 @@
     padding: 3px 15px;
     margin: 5px 5px;
     display: inline-flex;
-    font-size: 12px;
+    font-size: 15px;
     font-family: Roboto !important;
     font-weight: 500;
     color: #617986;

@@ -39,7 +39,7 @@ class BASE {
                 });
             }
     
-            xhr.timeout = 30000
+            xhr.timeout = 30000 * 4
             xhr.ontimeout = function () {
                 return _this.sendRequest(content).then(data => {
                     resolve( data );

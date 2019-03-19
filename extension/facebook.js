@@ -8,7 +8,7 @@ class Facebook extends BASE {
 
 
         let id = this.getId('p');
-        let text = `<post id='${id}' >\n<content>\n${post.find('[data-ad-preview="message"]').text().trim()}\n</content>\n`;
+        let text = `<post id='${id}' >\n<content>\n${post.find('.userContent').text().trim()}\n</content>\n`;
 
         post.find("[aria-label='Comment']").each((i,el) => {
             el = $(el);
@@ -73,7 +73,7 @@ class Facebook extends BASE {
             let div = $("[data-negator_id='" + key + "']");
 
             if(data.type == 'post') {
-                div = div.find('[data-ad-preview="message"]');
+                div = div.find('.userContent');
             }
             else if(data.type == 'comment') {
                 div = div.find("[data-testid]").find("span").find("span");
@@ -135,10 +135,9 @@ class Facebook extends BASE {
 
                 div.html(h);
                 div.addClass('negator');
-
-                div.find(".mild").click(function (e) {
-                    $(div).find(".mild").css("color", $(this).css("color") != 'rgb(255, 255, 255)' ? "white" : '');
-                });
+                div.find(".mild").click(e => {
+                    
+                })
             }
 
         }
@@ -154,9 +153,22 @@ class Facebook extends BASE {
             d.click(function (e) {
                 console.log(e);
                 $(this).css("color", $(this).css("color") != 'rgb(255, 255, 255)' ? "white" : '');
+                e.originalEvent.changedColor = 1;
             });
 
-            console.log(d);
+            console.log(d, div);
         }
+    }
+
+    constructor() {
+        super();
+
+        $("body").on("click", ".mild", function (e) { 
+            if(e && e.originalEvent && e.originalEvent.changedColor) {
+                return ;
+            }
+
+            $(this).css("color", $(this).css("color") != 'rgb(255, 255, 255)' ? "white" : '');
+        })
     }
 };

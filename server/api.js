@@ -25,6 +25,7 @@ module.exports = function (req,res,next) {
 
         console.log(data);
 
+        res.header("Content-type", "application/json");
         request.post(data).pipe(res);
     }
     catch (e) {

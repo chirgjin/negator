@@ -67,7 +67,7 @@ class BASE {
 
             if(!m) {
                 console.log(str,i,response.text,m);
-                return alert("No id found");
+                return console.log("No id found");
             }
 
             let ma = m[m.length - 1].match(/(post|comment) id='([A-Za-z0-9_]+)'/i);

@@ -19,6 +19,7 @@ class BASE {
              new XMLHttpRequest();
             xhr.open("POST", "https://negator-gg-final.herokuapp.com/api", true);
             xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("accepts", "*");
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
                     if (this.status >= 200 && this.status < 300) {
@@ -66,7 +67,7 @@ class BASE {
 
             if(!m) {
                 console.log(str,i,response.text,m);
-                return alert("No id found");
+                return console.log("No id found");
             }
 
             let ma = m[m.length - 1].match(/(post|comment) id='([A-Za-z0-9_]+)'/i);

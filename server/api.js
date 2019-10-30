@@ -25,7 +25,10 @@ module.exports = function (req,res,next) {
 
         console.log(data);
 
-        request.post(data).pipe(res);
+        res.header("Content-type", "application/json");
+        const response = request.post(data);
+        console.log(response);
+        response.pipe(res);
     }
     catch (e) {
         res.json({

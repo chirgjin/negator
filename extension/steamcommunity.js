@@ -45,7 +45,7 @@ class SteamCommunity extends BASE {
         //     }
         // });
 
-        $(".forum_op .content, #news .body, .commentthread_comment_text").each( (i, el) => {
+        $(".forum_op .content, #news .body, .commentthread_comment_text, .grouppage_header_name").each( (i, el) => {
 
             el = $(el)
 

@@ -8,7 +8,17 @@ function runCode() {
             return ;
         }
 
-        const obj = window.location.hostname.match(/facebook\.com/i) ? new Facebook : new WP;
+        let obj;
+        
+        if(window.location.hostname.match(/facebook\.com/i)) {
+            obj = new Facebook
+        }
+        else if(window.location.hostname.match(/steamcommunity\.com/i)) {
+            obj = new SteamCommunity
+        }
+        else {
+            obj = new WP
+        }
         
         console.log(obj);
     });

@@ -63,14 +63,14 @@ class BASE {
         response.getId = (str) => {
             let i = response.text.indexOf(str);
 
-            let m = response.text.substr(0,i+1).match(/(post|comment) id='[A-Za-z0-9_]+'/ig);
+            let m = response.text.substr(0,i+1).match(/(post|comment|element) id='[A-Za-z0-9_]+'/ig);
 
             if(!m) {
                 console.log(str,i,response.text,m);
                 return console.log("No id found");
             }
 
-            let ma = m[m.length - 1].match(/(post|comment) id='([A-Za-z0-9_]+)'/i);
+            let ma = m[m.length - 1].match(/(post|comment|element) id='([A-Za-z0-9_]+)'/i);
 
             return {
                 id : ma[2],
@@ -117,6 +117,15 @@ class BASE {
         chrome.storage.local.get(['categories', 'hate_speech_percentage'], data => {
             this._hidePercen = parseInt(data.hate_speech_percentage) || 0;
         });
+
+        
+        $("body").on("click", ".mild", function (e) { 
+            if(e && e.originalEvent && e.originalEvent.changedColor) {
+                return ;
+            }
+
+            $(this).css("color", $(this).css("color") != 'rgb(255, 255, 255)' ? "white" : '');
+        })
     }
 
     insertion_event(event) {
@@ -272,5 +281,79 @@ class BASE {
 
     isIntense(data) {
         return 1 || data.negative >= 1 || data.negative < 1 && data.reasons.length > 0;
+    }
+
+    hideStuff(div, data) {
+
+        if(data.percen >= this.hidePercen && div.text().length > 470 && data.type == 'post') {
+            div.addClass("negator main-content");
+            
+            let htm = `<div class="intense">
+            <div class="content">
+                <div class="grid">
+                    <img src="https://i.imgur.com/9j3jveC.png">
+                    <p>This posts may contain intense hate or violent statements which may hurt your feelings. </p>
+                    <ul class="list-abuse">`;
+
+            (data.reasons || ["misconduct"]).forEach((reason) => {
+                htm += `<li>${reason}</li>`;
+            });
+
+            htm += `</ul>
+			</div>
+			<button data-for='view-post' >View Post Anyway</button>
+		</div>	
+	</div>
+
+    <img src="https://i.imgur.com/UCDofmG.png" class="hide-post hidden" data-for='hide-post' >`;
+    
+            div.prepend(htm);
+
+            div.find("[data-for='view-post']").click(e => {
+                div.find(".intense").addClass("hidden");
+                div.find(".hide-post").removeClass("hidden");
+            }).removeAttr("data-for");
+
+            div.find("[data-for='hide-post']").click(e => {
+                div.find(".intense").removeClass("hidden");
+                div.find(".hide-post").addClass("hidden");
+            });
+            
+        }
+        else if(data.abuses.length > 0){
+            let h = div.html() || '';
+            data.abuses.forEach( (abuse,i) => {
+                console.log(abuse);
+
+                h = h.replace(abuse.text, `<a href='#' class='mild' >%${i}%<span class='tooltiptext' >${abuse.type}</span></a>`);
+            });
+
+            if(data.abuses.length > 0) {
+                data.abuses.forEach( (abuse,i) => {
+                    h = h.replace(`%${i}%`, abuse.text);
+                });
+
+                div.html(h);
+                div.addClass('negator');
+                div.find(".mild").click(e => {
+                    
+                })
+            }
+
+        }
+        //else if(data.percen >= this.hidePercen) {
+        else {
+
+            let d = $(document.createElement('div')).addClass('mild').html(`<span class='tooltiptext' >${ (data.reasons && data.reasons.length > 1 ? data.reasons : ['misconduct']).join(',')}</span>`);
+
+            d.append(div.html());
+
+            div.html(d).addClass('negator');
+
+            d.click(function (e) {
+                $(this).css("color", $(this).css("color") != 'rgb(255, 255, 255)' ? "white" : '');
+                e.originalEvent.changedColor = 1;
+            });
+        }
     }
 }

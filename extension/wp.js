@@ -108,9 +108,9 @@
 
 				});
 
-				div.find(".mild").click(function (e) {
-                    $(div).find(".mild").css("color", $(this).css("color") != 'rgb(255, 255, 255)' ? "white" : '');
-				});
+				// div.find(".mild").click(function (e) {
+                //     $(div).find(".mild").css("color", $(this).css("color") != 'rgb(255, 255, 255)' ? "white" : '');
+				// });
 				
 				div.find(".negator-abuse").click(function (e) {
 					div.find(".negator-abuse").toggleClass("negator-viewable");

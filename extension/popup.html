@@ -61,7 +61,7 @@
         cursor: pointer;
         border-radius: 50%;
     }
-
+    
     .slider::-moz-range-thumb {
         width: 30px;
         height: 30px;
@@ -109,109 +109,187 @@
         left: 10px;
     }
     /* The switch - the box around the slider */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+    
+    /* Hide default HTML checkbox */
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    
+    /* The slider */
+    .slide-switch {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+    
+    .slide-switch:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: #016070;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+    
+    input:checked + .slide-switch {
+        background-color: #ffffff;
+    }
+    
+    input:focus + .slide-switch {
+        box-shadow: 0 0 1px #ffffff;
+    }
+    
+    input:checked + .slide-switch:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+    
+    /* Rounded sliders */
+    .slide-switch.round {
+        border-radius: 34px;
+    }
+    
+    .slide-switch.round:before {
+        border-radius: 50%;
+    }
+    .toggle-hate-type{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .hate-type {
+        display: flex;
+        justify-content: space-between;
+        margin-top:30px;
+    }
+    p{
+        font-size: 20px;
+        margin: 0;
+        font-weight: bold;
+        color: white;
+        letter-spacing: 0.5px;
+    }
+    
+    ::-webkit-scrollbar {
+        width: 5px;
+        transition: all  1s ease-in;
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #016070; 
+        transition: all  1s ease-in;
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #016070; 
+        border-radius: 5px;
+        transition: all 1s ease-in;
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #00434e; 
+    }
+    
+    
+    .negator-popup .password-overlay {
+        position:fixed;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        z-index: 99999;
+        background:#016070;
+        color:#fff;
+    }
 
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+    .input {
+        display:block;
+        border-radius: 5px;
+        outline:0;
+        width:95%;
+        margin:5px auto;
+        padding:7px;
+    }
 
-/* The slider */
-.slide-switch {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+    .text-center {
+        text-align: center;
+    }
 
-.slide-switch:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: #016070;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+    .btn {
+        position: relative;
+        padding: 12px 30px;
+        margin: .3125rem auto;
+        font-size: .75rem;
+        font-weight: 400;
+        line-height: 1.428571;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0;
+        cursor: pointer;
+        border: 0;
+        border-radius: .2rem;
+        transition: box-shadow .2s cubic-bezier(.4,0,1,1),background-color .2s cubic-bezier(.4,0,.2,1);
+        will-change: box-shadow,transform;
+        color: #fff;
+        background-color: #00bcd4;
+        border-color: #00bcd4;
+        box-shadow: 0 2px 2px 0 rgba(0,188,212,.14), 0 3px 1px -2px rgba(0,188,212,.2), 0 1px 5px 0 rgba(0,188,212,.12);
+        display: inline-block;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        user-select: none;
+    }
 
-input:checked + .slide-switch {
-  background-color: #ffffff;
-}
+    .text-rose {
+        color:#f76898!important;
+    }
 
-input:focus + .slide-switch {
-  box-shadow: 0 0 1px #ffffff;
-}
-
-input:checked + .slide-switch:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slide-switch.round {
-  border-radius: 34px;
-}
-
-.slide-switch.round:before {
-  border-radius: 50%;
-}
-.toggle-hate-type{
-    margin-left: 20px;
-    margin-right: 20px;
-}
-.hate-type {
-    display: flex;
-    justify-content: space-between;
-    margin-top:30px;
-}
-p{
-    font-size: 20px;
-    margin: 0;
-    font-weight: bold;
-    color: white;
-    letter-spacing: 0.5px;
-}
-
-::-webkit-scrollbar {
-  width: 5px;
-  transition: all  1s ease-in;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #016070; 
-  transition: all  1s ease-in;
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #016070; 
-  border-radius: 5px;
-  transition: all 1s ease-in;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #00434e; 
-}
+    #unlock_msg {
+        font-size:large;
+    }
 </style>
 <body>
     <div class="negator-popup">
+        
+        <div class="password-overlay" id="password-overlay">
+            
+            <div class="negator-icon">
+                <img src="img/popup-logo.png" class="popup-logo">
+            </div>
+            
+            <div class="text-center text-rose" id="unlock_msg"></div>
+
+            <input type="password" id="negator_password" placeholder="Enter password to continue" class="input" />
+            <br>
+            <small>Note: Leave empty if no password assigned</small>
+            <br><br>
+            
+            <div class="text-center">
+                <button class='btn' id='unlock_negator'>Unlock</button>
+            </div>
+            
+        </div>
         <div class="negator-icon">
             <img src="img/popup-logo.png" class="popup-logo">
         </div>
@@ -235,8 +313,15 @@ p{
             </div>
         </div>
         <div style="height:15px;"></div>
+
+        <form id="change_password" >
+            <input type="password" id="new_pass" placeholder="Enter new password" class='input'>
+
+            <button class="btn" type="submit" >Change Password</button>
+        </form>
     </div>
 </body>
-    <script src="jQuery.js"></script>
-    <script src="app.js"></script>
+<script src="jQuery.js"></script>
+<script src="md5.js"></script>
+<script src="app.js"></script>
 </html>

@@ -20,6 +20,49 @@ $("#disableDomain").on("change",function () {
 
 });
 
+let _password;
+
+$("#unlock_negator").click(function (e) {
+    const msg = $("#unlock_msg")
+    if(!_password) {
+        return msg.html("Wait 2-3 seconds before retrying")
+    }
+
+    const password = $("#negator_password").val()
+
+    if(md5(password) == _password) {
+        $("#password-overlay").remove()
+    }
+    else {
+        msg.html("Incorrect password")
+    }
+})
+
+let pwState = 0
+
+$("#change_password").on("submit", function (e) {
+    e.preventDefault()
+
+    let rand = pwState = Math.random()
+
+    const pw = $("#new_pass").val()
+
+    port.postMessage({
+        type : "set",
+        key : "password_hash",
+        value : md5(pw)
+    })
+
+    const btn = $(this).find(".btn").html(pw == '' ? "Password Removed" : "Password Changed")
+    $("#new_pass").val('')
+
+    setTimeout(() => {
+        if(pwState == rand) {
+            btn.html("Change Password")
+        }
+    }, 2500)
+})
+
 // $(".search").change(function () {
 //     console.log(this.value);
 // })
@@ -59,4 +102,10 @@ $("#disableDomain").on("change",function () {
         console.log(host);
         $("#disableDomain").prop("checked", msg.disabledDomains.indexOf(host) > -1);
     });
+
+    _password = msg.password_hash || md5('')
+
+    if(!_password) {
+
+    }
  });

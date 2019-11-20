@@ -27,7 +27,7 @@ function set (prop, val) {
 
 function get () {
     return new Promise( resolve => {
-        chrome.storage.local.get(['disabledDomains', 'hate_speech_percentage'], data => {
+        chrome.storage.local.get(['disabledDomains', 'hate_speech_percentage', 'password_hash'], data => {
             console.log(data);
             resolve(data);
         });

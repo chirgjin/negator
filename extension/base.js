@@ -204,8 +204,6 @@ class BASE {
             };
         }
 
-        console.log(response);
-
         response.abuse.forEach(abuse => {
             let data = response.getId(abuse.text);
 
@@ -251,8 +249,8 @@ class BASE {
 
         });
 
-        console.log(response);
-        console.log(ids);
+        // console.log(response);
+        // console.log(ids);
 
         Object.keys(ids).forEach(key => {
             let data = ids[key];
@@ -285,7 +283,16 @@ class BASE {
 
     hideStuff(div, data) {
 
-        if(data.percen >= this.hidePercen && div.text().length > 470 && data.type == 'post') {
+        let fbCheck = 0;
+
+        if(this.isFB) {
+            const btn = div.find(`[role="button"]`);
+            if(btn.get(0) && btn.get(0).innerHTML.match(/see more/i)) {
+                fbCheck = 1;
+            }
+        }
+        
+        if(fbCheck || data.percen >= this.hidePercen && div.text().length > 470 && data.type == 'post') {
             div.addClass("negator main-content");
             
             let htm = `<div class="intense">
@@ -336,8 +343,8 @@ class BASE {
                 div.html(h);
                 div.addClass('negator');
                 div.find(".mild").click(e => {
-                    
-                })
+                    e.preventDefault();
+                });
             }
 
         }

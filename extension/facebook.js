@@ -1,14 +1,17 @@
 class Facebook extends BASE {
 
+    get divSelector() {
+        return `div[dir='auto'] div[id*='jsc_'] > div > div`;
+    }
+
     loadPostData(post) {
         if(post.data("negator_id")) {
-            console.log(post);
             return '';
         }
 
 
         let id = this.getId('p');
-        let text = `<post id='${id}' >\n<content>\n${post.find('.userContent').text().trim()}\n</content>\n`;
+        let text = `<post id='${id}' >\n<content>\n${post.find(this.divSelector).text().trim()}\n</content>\n`;
 
         post.find("[aria-label='Comment']").each((i,el) => {
             el = $(el);
@@ -40,6 +43,7 @@ class Facebook extends BASE {
 
             if(cont.trim().length < len && el.css("display") != 'none' && el.attr("aria-label") != 'Comment') {
                 cont += this.loadPostData(el) || '';
+
                 if(cont.trim().length >= len) {
                     this.sendNextBatch = 1;
                 }
@@ -52,7 +56,15 @@ class Facebook extends BASE {
     }
 
     async isReady() {
+
+        let lastTime = this.__lastTime || null;
         
+        console.log("IsReady");
+        if(!lastTime || Date.now() - 2500 >= lastTime) {
+            this.__lastTime = Date.now();
+            return 1;
+        }
+
         if(!$("._2iwq._6b5s").hasClass("_2x3w") && !$(".uiSimpleScrollingLoadingIndicator").get(0)) {
             await this.wait(250);
             
@@ -73,7 +85,11 @@ class Facebook extends BASE {
             let div = $("[data-negator_id='" + key + "']");
 
             if(data.type == 'post') {
-                div = div.find('.userContent');
+                div = div.find(this.divSelector);
+                console.log(div);
+                // if(div.has(">span")) {
+                //     div = div.find(">span");
+                // }
             }
             else if(data.type == 'comment') {
                 div = div.find("[data-testid]").find("span").find("span");
@@ -86,7 +102,14 @@ class Facebook extends BASE {
     
 
     constructor() {
-        super();
 
+        super();
+        this.isFB = true;
+        
+
+
+        setTimeout(() => {
+            this.sendContentRequest();
+        }, 5000);
     }
 };
